@@ -103,7 +103,7 @@ def happiestComparisonVisualization(df):
     ax1.axes.get_yaxis().set_ticks([])
 
     ax0.text(0,10.8,'The Happiest & Unhappiest Countries in the World: Side-by-side',fontfamily='sans-serif',fontsize=20,fontweight='bold',color='#323232')
-    ax0.text(0,10.3,'We will investigate how these countries differ, and whether or not population has anything to do with it',fontfamily='monospace',fontsize=15,fontweight='light',color='gray')
+    ax0.text(0,10.3,'Pada visualisasi kedepan, kita akan menginvestigasi apa yang menjadi faktor dari tingkat kebahagiaan negara ini',fontfamily='monospace',fontsize=15,fontweight='light',color='gray')
 
     # rect
     from matplotlib.patches import Rectangle
@@ -115,10 +115,9 @@ def happiestComparisonVisualization(df):
     fig.text(0.53,0.72,
             
     '''
-    What makes these 
-    countries appear 
-    at the bottom of
-    the list?
+    Apa yang membuat negara
+    ini menjadi negara yang
+    tampil di urutan terakhir
 
     ''',color='black',fontfamily='monospace',fontsize=12)
     

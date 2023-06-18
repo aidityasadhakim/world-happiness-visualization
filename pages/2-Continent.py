@@ -1,5 +1,4 @@
 import streamlit as st
-
 import numpy as np 
 import pandas as pd 
 
@@ -12,9 +11,7 @@ import matplotlib.gridspec as grid_spec
 import seaborn as sns
 import squarify
 
-from components.header import *
-from components.happiest import *
-from components.happiest_comparison import *
+from components.continent import *
 
 #get data
 df = pd.read_csv('world-happiness-report-2021.csv')
@@ -32,24 +29,23 @@ pop.rename(columns={'Country (or dependency)': 'Country'}, inplace=True)
 temporal = df2.groupby(['year','Country'])['Life Ladder'].mean().unstack().T
 temporal = temporal.fillna(0).astype(int)
 
-# colours
-low_c = '#dd4124'
-high_c = '#009473'
-plt.rcParams["font.family"] = "monospace"
+happiness_mean = df['Ladder score'].mean()
 
-st.pyplot(headerVisualization())
+df['lower_happy'] = df['Ladder score'].apply(lambda x: 0 if x < happiness_mean else 1)
 
-past_winners = df2.loc[df2.groupby("year")["Life Ladder"].idxmax()]
-past_bottom = df2.loc[df2.groupby("year")["Life Ladder"].idxmin()]
+st.title('Continent Comparison')
+st.subheader('Perbandingan Benua')
 
-hap = df.groupby('Country')['Ladder score'].mean().sort_values(ascending=False)[:10]
-unhap = df.groupby('Country')['Ladder score'].mean().sort_values(ascending=True)[:10]
-top_bottom = hap.append(unhap, ignore_index=False).sort_values(ascending=True)
+st.write(
+    '''
+    Selanjutnya kita akan membahas lebih lanjut terkait perbandingan antar benua
+    mencari faktor-faktor tertinggi di setiap benua dan membandingkannya
+    dengan satu sama lain
+    '''
+)
 
+st.pyplot(continetComparison(df))
 
-# Visualisasi kedua
-st.pyplot(happiestVisualization(top_bottom))
+st.pyplot(factorComparison(df))
 
-# Visualisasi ketiga
-st.pyplot(happiestComparisonVisualization(df))
-
+regionComparisonMap(df)

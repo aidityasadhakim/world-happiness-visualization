@@ -18,6 +18,11 @@ pop = pd.read_csv('population_by_country_2020.csv')
 
 safety = df.copy()
 
+st.set_page_config(
+    page_title="Population",
+    page_icon="https://res.cloudinary.com/dhutys1vb/image/upload/v1685082988/hmik/favicon/android-chrome-192x192_bylewg.png",
+)
+
 # renaming columns for easier merge later
 df.rename(columns={'Country name': 'Country'}, inplace=True)
 df2.rename(columns={'Country name': 'Country'}, inplace=True)
@@ -49,7 +54,7 @@ st.title("Population Visualization")
 st.write(
     '''
     Pada visualisasi halaman ini akan berfokus kepada visualisasi dengan
-    penambahan dataset berupa total populasi dari setiap negara.
+    penambahan dataset berupa total populasi di tahun 2020 dari setiap negara.
     '''
 )
 st.subheader("Happiness vs Median Age vs Population")
@@ -72,7 +77,7 @@ st.write(
 st.subheader("Happiness vs Median Age vs Fertility Rate")
 st.write(
     '''
-    Perbandingan selanjutnya membandingkan antara tingkat kebahagiaan, rata2 umur dan juga angka kelahiran. Hal ini dibandingkan untuk menemukan apakah sebuah negara dengan tingkat kelahiran yang tinggi dapat meningkatkan kebahagiaan atau tidak.
+    Perbandingan selanjutnya membandingkan antara tingkat kebahagiaan, rata2 umur dan juga angka kelahiran. Hal ini dibandingkan untuk menemukan apakah sebuah negara dengan tingkat kelahiran yang tinggi dapat meningkatkan kebahagiaan atau tidak.\n
     '''
 )
 
@@ -81,5 +86,20 @@ st.pyplot(fertilityComparison(df))
 st.write(
     '''
     Berkaitan dengan visualisasi sebelumnya, hal yang berkaitan dengan tingkat populasi ataupun pertumbuhan berkaitan dalam mempengaruhi tingkat kebahagiaan sebuah negara
+    '''
+)
+
+st.subheader("Happiness vs Density")
+st.write(
+    '''
+    Selanjutnya kami mencoba melihat bagaimana pengaruh kepadatan penduduk suatu negara mempengaruhi tingkat kebahagiaan sebuah negara, sebelumnya telah diketahui bahwa peningkatan populasi dan jumlah populasi mempengaruhi tingkat kebahagiaan sebuah negara, maka dapat ditebak bahwa seharusnya tingkat kepadatan penduduk juga berpengaruh.
+    '''
+)
+
+st.pyplot(densityComparison(df))
+
+st.write(
+    '''
+    Mengejutkannya, kepadatan penduduk tidak mempengaruhi tingkat kebahagiaan sebuah negara.
     '''
 )

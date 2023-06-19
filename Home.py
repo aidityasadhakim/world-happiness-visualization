@@ -1,4 +1,8 @@
 import streamlit as st
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 import numpy as np 
 import pandas as pd 
@@ -32,10 +36,25 @@ pop.rename(columns={'Country (or dependency)': 'Country'}, inplace=True)
 temporal = df2.groupby(['year','Country'])['Life Ladder'].mean().unstack().T
 temporal = temporal.fillna(0).astype(int)
 
-# colours
-low_c = '#dd4124'
-high_c = '#009473'
-plt.rcParams["font.family"] = "monospace"
+st.set_page_config(
+    page_title="Home",
+    page_icon="https://res.cloudinary.com/dhutys1vb/image/upload/v1685082988/hmik/favicon/android-chrome-192x192_bylewg.png",
+)
+
+st.title("World Happiness Visualization")
+
+st.write(
+    '''
+    Selamat datang di visualisasi World Happiness yang bertujuan untuk menganalisa dan menampilkan beragam visualisasi terkait kebahagiaan negara negara yang terdapat di dunia, tidak hanya itu, visualisasi ini juga akan memberikan insight terkait apa saja yang mempengaruhi tingkat kebahagiaan sebuah negara.
+    '''
+)
+
+st.subheader("World Index Visualization")
+st.write(
+    '''
+    Pertama-tama mari lihat 10 negara paling bahagia dan 10 negara paling tidak bahagia
+    '''
+)
 
 st.pyplot(headerVisualization())
 
@@ -46,10 +65,29 @@ hap = df.groupby('Country')['Ladder score'].mean().sort_values(ascending=False)[
 unhap = df.groupby('Country')['Ladder score'].mean().sort_values(ascending=True)[:10]
 top_bottom = hap.append(unhap, ignore_index=False).sort_values(ascending=True)
 
-
 # Visualisasi kedua
 st.pyplot(happiestVisualization(top_bottom))
 
+st.subheader("Negara Bahagia vs Negara Tidak Bahagia")
+st.write(
+    '''
+    Visualisasi di awal memberikan insight terkait 10 negara terbahagia dan 10 negara paling tidak bahagia, ditampilkan bahwa 9 dari 10 negara paling bahagia terletak di eropa sedangkan 7 dari 10 negara paling tidak bahagia terletak di Africa
+    '''
+)
+
+st.subheader("Side by side comparison")
+st.write(
+    '''
+    Agar lebih jelas maka mari visualisasikan perbandingan secara side by side antara 10 negara teratas dan 10 negara terbawah
+    '''
+)
 # Visualisasi ketiga
 st.pyplot(happiestComparisonVisualization(df))
+
+st.subheader("Why?")
+st.markdown(
+    f'''
+    Kenapa? Merupakan pertanyaan yang akan pertama kali timbul setelah melihat visualisasi diatas, mengapa negara yang terletak di Eropa cenderung lebih bahagia dan negara yang terletak di Afrika cenderung tidak bahagia?\nApa saja faktor yang dapat mempengaruhi hal-hal tersebut? Mari kita analisis lebih di halaman selanjutnya
+    '''
+)
 

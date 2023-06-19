@@ -6,3 +6,4 @@ geopandas==0.13.2
 pycountry==22.3.5
 streamlit==1.22.0
 squarify==0.4.3
+python-dotenv==1.0.0

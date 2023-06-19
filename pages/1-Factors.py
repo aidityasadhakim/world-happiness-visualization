@@ -15,6 +15,11 @@ from components.life_expectancy import lifeExpectancyVisualization
 from components.african_comparison import africanComparisonVisualization
 from components.corruption import *
 
+st.set_page_config(
+    page_title="Factors",
+    page_icon="https://res.cloudinary.com/dhutys1vb/image/upload/v1685082988/hmik/favicon/android-chrome-192x192_bylewg.png",
+)
+
 #get data
 df = pd.read_csv('world-happiness-report-2021.csv')
 df2 = pd.read_csv('world-happiness-report.csv')
